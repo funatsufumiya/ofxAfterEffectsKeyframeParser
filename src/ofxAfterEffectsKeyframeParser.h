@@ -12,7 +12,7 @@ public:
 		
 	public:
 		
-		void getTrackName() const { return track_name; }
+		string getTrackName() const { return track_name; }
 		
 		size_t getNumParams() const { return param_name.size(); }
 		string getParamName(size_t idx) const { return param_name.at(idx); }
