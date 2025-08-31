@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxAfterEffectsKeyframeParser.h"
 
+#include "optional_ref.h"
+
 class ofApp : public ofBaseApp{
 	public:
 		void setup();
@@ -22,4 +24,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         ofxAfterEffectsKeyframeParser aekey;
+		optional_ref<const ofxAfterEffectsKeyframeParser::Track> track;
+		size_t frame = 0;
 };
