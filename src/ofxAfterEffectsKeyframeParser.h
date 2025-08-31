@@ -71,6 +71,31 @@ public:
 	
 	float getFirstFrame() const { return first_frame; }
 	float getLastFrame() const { return last_frame; }
+
+	float getSourceWidth()
+	{
+		 if( header.count("Source Width") > 0 ) { return header["Source Width"]; } else { return -1.0f; }
+	}
+	
+	float getSourceHeight()
+	{
+		if( header.count("Source Height") > 0 ) { return header["Source Height"]; } else { return -1.0f; }
+	}
+
+	float getUnitsPerSecond()
+	{
+		if( header.count("Units Per Second") > 0 ) { return header["Units Per Second"]; } else { return -1.0f; }
+	}
+
+	float getCompPixelAspectRatio()
+	{
+		if( header.count("Comp Pixel Aspect Ratio") > 0 ) { return header["Comp Pixel Aspect Ratio"]; } else { return -1.0f; }
+	}
+	float getSourcePixelAspectRatio()
+
+	{
+		if( header.count("Source Pixel Aspect Ratio") > 0 ) { return header["Source Pixel Aspect Ratio"]; } else { return -1.0f; }
+	}
 	
 protected:
 	
@@ -99,7 +124,7 @@ protected:
 			{
 				// statement line
 				
-				if (line == "Adobe After Effects 8.0 Keyframe Data")
+				if (line == "Adobe After Effects 8.0 Keyframe Data" || line == "Adobe After Effects 9.0 Keyframe Data")
 				{
 					is_header = true;
 					continue;

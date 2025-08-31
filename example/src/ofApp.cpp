@@ -7,6 +7,10 @@ void ofApp::setup(){
     aekey.open("test.txt");
 
     aekey.dumpTrackName();
+    
+    ofLog() << "Units per second: " << aekey.getUnitsPerSecond();
+    ofLog() << "Source Height: " << aekey.getSourceHeight();
+    ofLog() << "Source Width: " << aekey.getSourceWidth();
 
     const ofxAfterEffectsKeyframeParser::Track& t = aekey.getTrack("Transform/Rotation");
 
