@@ -17,18 +17,46 @@ public:
 		size_t getNumParams() const { return param_name.size(); }
 		string getParamName(size_t idx) const { return param_name.at(idx); }
 		
-		float getParam(float frame, const string& param_name) const
+		float getParam(float frame, const string& param_name, bool interpolated = true) const
 		{
-			map<float, vector<float> >::iterator it = data.lower_bound(frame);
-			
 			if (param_name_map.find(param_name) == param_name_map.end())
 			{
 				ofLogError("ofxAfterEffectsKeyframeParser::Track::getParam") << "invalid param name";
 				return 0;
 			}
-			
-			if (it == data.end()) { it--; }
-			return it->second[param_name_map[param_name]];
+			if (data.empty()) return 0;
+
+			int idx = param_name_map.at(param_name);
+
+			auto it_upper = data.lower_bound(frame);
+
+			if (!interpolated) {
+				// returns nearest keyframe value
+				if (it_upper == data.end()) { --it_upper; }
+				return it_upper->second[idx];
+			}
+
+			// linear interporate
+			if (it_upper == data.end()) {
+				--it_upper;
+				return it_upper->second[idx];
+			}
+			if (it_upper == data.begin()) {
+				return it_upper->second[idx];
+			}
+			if (it_upper->first == frame) {
+				return it_upper->second[idx];
+			}
+
+			auto it_lower = std::prev(it_upper);
+
+			float frame0 = it_lower->first;
+			float frame1 = it_upper->first;
+			float value0 = it_lower->second[idx];
+			float value1 = it_upper->second[idx];
+
+			float t = (frame - frame0) / (frame1 - frame0);
+			return value0 + (value1 - value0) * t;
 		}
 		
 	protected:
