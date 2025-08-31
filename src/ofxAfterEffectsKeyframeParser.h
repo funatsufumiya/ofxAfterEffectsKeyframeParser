@@ -142,10 +142,8 @@ protected:
 		first_frame = std::numeric_limits<float>::infinity();
 		last_frame = -std::numeric_limits<float>::infinity();
 		
-		while (!buf.isLastLine())
+		for(auto&& line: buf.getLines())
 		{
-			string line = buf.getNextLine();
-			
 			if (line.empty()) continue;
 			
 			if (line[0] != '\t')
