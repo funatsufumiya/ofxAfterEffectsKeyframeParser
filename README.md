@@ -24,6 +24,6 @@ for (int i = 0 ; i <= aekey.getLastFrame(); i++)
 
 ## Limitation
 
-Easing data would be lost when copy-pasted.
+Easing (curve) data would be lost when copy-pasted.
 
-If you need easing, please consider [ofxAEEasingLoader](https://github.com/funatsufumiya/ofxAEEasingLoader/).
+If you need easing (curve), please consider [ofxAEEasingLoader](https://github.com/funatsufumiya/ofxAEEasingLoader/).
